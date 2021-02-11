@@ -1,0 +1,16 @@
+{
+    "name": "ciecierzyca/last_commit",
+    "authors": [
+        {
+            "name": "Kuba Rudzinski",
+            "email": "kontakt@kubarudzinski.pl"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0",
+        "symfony/console": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {"": "src/"}
+    }
+}
