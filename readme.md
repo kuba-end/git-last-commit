@@ -1,2 +1,3 @@
-#Last commit SHA
-My command showing us SHA of last git commit
+#showCommit()
+showCommit is a method in LastCommit class which allow to get last commit's SHA
+
