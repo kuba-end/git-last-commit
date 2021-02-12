@@ -39,6 +39,10 @@ class ComposerStaticInit3eecc111ac90ddbf21076ff002d31a46
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Container\\' => 14,
         ),
+        'K' => 
+        array (
+            'KubaEnd\\' => 8,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -96,6 +100,10 @@ class ComposerStaticInit3eecc111ac90ddbf21076ff002d31a46
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'KubaEnd\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -110,14 +118,9 @@ class ComposerStaticInit3eecc111ac90ddbf21076ff002d31a46
         ),
     );
 
-    public static $fallbackDirsPsr4 = array (
-        0 => __DIR__ . '/../..' . '/src',
-    );
-
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'GitRequest' => __DIR__ . '/../..' . '/src/GitRequest.php',
         'GuzzleHttp\\BodySummarizer' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/BodySummarizer.php',
         'GuzzleHttp\\BodySummarizerInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/BodySummarizerInterface.php',
         'GuzzleHttp\\Client' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Client.php',
@@ -201,8 +204,6 @@ class ComposerStaticInit3eecc111ac90ddbf21076ff002d31a46
         'GuzzleHttp\\TransferStats' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/TransferStats.php',
         'GuzzleHttp\\Utils' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Utils.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
-        'Model\\LastCommit' => __DIR__ . '/../..' . '/src/Model/LastCommit.php',
-        'Model\\WhatTime' => __DIR__ . '/../..' . '/src/Model/WhatTime.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
         'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
@@ -348,7 +349,6 @@ class ComposerStaticInit3eecc111ac90ddbf21076ff002d31a46
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit3eecc111ac90ddbf21076ff002d31a46::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit3eecc111ac90ddbf21076ff002d31a46::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit3eecc111ac90ddbf21076ff002d31a46::$fallbackDirsPsr4;
             $loader->classMap = ComposerStaticInit3eecc111ac90ddbf21076ff002d31a46::$classMap;
 
         }, null, ClassLoader::class);

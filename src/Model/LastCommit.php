@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace KubaEnd\Model;
 
 use GuzzleHttp\Client;
 use Symfony\Component\Console\Command\Command;

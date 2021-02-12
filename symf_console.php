@@ -6,8 +6,8 @@ use Symfony\Component\Console\Application;
 
 $application = new Application();
 
-$application->add(new Model\WhatTime());
-$application->add(new Model\LastCommit());
+$application->add(new KubaEnd\Model\WhatTime());
+$application->add(new KubaEnd\Model\LastCommit());
 
 $application->run();
 
