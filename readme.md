@@ -1,8 +1,8 @@
-#showCommit()
+# showCommit()
 showCommit is a method in LastCommit class which allow to get last commit's SHA
-##Installation
+## Installation
 You can clone this repository 
-##Usage
+## Usage
 Use it by type 
 ```bash
 php symf_console.php showCommit
@@ -13,7 +13,7 @@ Insert your login : # e.g. kuba-end
 Insert repo name : # e.g. git-last-commit
 ```
 Script will return SHA of last commit and link for that certain commit
-##Contributing
+## Contributing
 Pull request are welcome
-##License
+## License
 [MIT](https://choosealicense.com/licenses/mit/)
