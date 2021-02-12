@@ -15,15 +15,15 @@ class LastCommit extends Command
     {
         parent::configure();
         $this->setDescription('Show info about your last git commit')
-            ->setHelp('Idzie polak, rusek i niemiec')
+            ->setHelp('Type your login in first input area and name of repository you want to get the result from')
         ;
     }
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $client = new Client();
         $helper = $this->getHelper('question');
-        $question = new Question('Podaj swój login : ');
-        $question1 = new Question('Podaj nazwę repozytorium : ');
+        $question = new Question('Insert your login : ');
+        $question1 = new Question('Insert repo name : ');
         $nick = $helper->ask($input,$output,$question);
         $repo = $helper->ask($input,$output,$question1);
 
