@@ -14,5 +14,5 @@ $last_commit_sha = ($response_as_array[0]["sha"]);
 $last_commit_url = ($response_as_array[0]["html_url"]);
 
 class ChoosePlatform{
-
+    return "1";
 }
