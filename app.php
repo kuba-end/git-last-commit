@@ -10,3 +10,4 @@ $application->add(new KubaEnd\Model\LastCommit());
 
 $application->run();
 
+

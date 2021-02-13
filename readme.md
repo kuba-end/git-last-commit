@@ -5,7 +5,7 @@ You can clone this repository
 ## Usage
 Use it by type 
 ```bash
-php symf_console.php showCommit
+php app.php showCommit
 ```
 Remember to change directory to dir with cloned repository. After run the script you will see:
 ```bash
