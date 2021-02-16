@@ -56,4 +56,3 @@ class LastCommitFrom extends Command{
       return Command::SUCCESS;
      }
 }
-
