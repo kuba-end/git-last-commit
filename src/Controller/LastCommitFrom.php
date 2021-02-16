@@ -36,23 +36,34 @@ class LastCommitFrom extends Command{
               $repo = $helper->ask($input,$output,$question1);
               $request = $client->request('GET', 'https://api.github.com/repos/'.$nick.'/'.$repo.'/commits');
               $response =$request->getBody();
-              $response_as_array = ((json_decode($response,true)));
-              $last_commit_sha = ($response_as_array[0]["sha"]);
-              $last_commit_url = ($response_as_array[0]["html_url"]);
-              echo $last_commit_sha.PHP_EOL.$last_commit_url.PHP_EOL;
+              $responseAsArray = ((json_decode($response,true)));
+              $lastCommitSha = ($responseAsArray[0]["sha"]);
+              $lastCommitUrl = ($responseAsArray[0]["html_url"]);
+              echo "Sha of your last commit is: ".$lastCommitSha.PHP_EOL.$lastCommitUrl.PHP_EOL;
               break;
           case "Bitbucket":
               $client = new Client();
-              $question = new Question('Insert your workspace : ');
+              $question = new Question("Insert your workspace's name: ");
               $question1 = new Question('Insert repo name : ');
               $workspace = $helper->ask($input,$output,$question);
               $repoSlug = $helper->ask($input,$output,$question1);
               $request1 = $client->request('GET', 'https://api.bitbucket.org/2.0/repositories/'.$workspace.'/'.$repoSlug.'/commits');
               $response1 =$request1->getBody();
-              $response_as_array1 = ((json_decode($response1,true)));
-              $last_commit_sha1 = ($response_as_array1["values"][0]["hash"]);
-              $last_commit_url1 = ($response_as_array1["values"][0]["repository"]["links"]["html"]["href"]);
-              echo $last_commit_sha1.PHP_EOL.$last_commit_url1.PHP_EOL;
+              $responseAsArray1 = ((json_decode($response1,true)));
+              $lastCommitSha1 = ($responseAsArray1["values"][0]["hash"]);
+              $lastCommitUrl1 = ($responseAsArray1["values"][0]["repository"]["links"]["html"]["href"]);
+              echo "Sha of your last commit is: ".$lastCommitSha1.PHP_EOL.$lastCommitUrl1.PHP_EOL;
+              break;
+          case "GitLab":
+              $client = new Client();
+              $question = new Question("Insert your projects ID: ");
+              $projectId = $helper->ask($input,$output,$question);
+              $request2 = $client->request('GET','https://gitlab.com/api/v4/projects/'.$projectId.'/repository/commits');
+              $response2 = $request2->getBody();
+              $responseAsArray2 = ((json_decode($response2,true)));
+              $lastCommitSha2 = ($responseAsArray2[0]["id"]);
+              $lastCommitUrl2 = ($responseAsArray2[0]["web_url"]);
+              echo "Sha of your last commit is: ".$lastCommitSha2.PHP_EOL.$lastCommitUrl2.PHP_EOL;
               break;
 
       }
