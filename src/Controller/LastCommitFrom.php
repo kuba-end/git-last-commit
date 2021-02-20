@@ -8,9 +8,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-use KubaEnd\Model\GitHubConnect;
-use KubaEnd\Model\BitbucketConnect;
-use KubaEnd\Model\GitLabConnect;
+use KubaEnd\Commands\GitHubConnect;
+use KubaEnd\Commands\BitbucketConnect;
+use KubaEnd\Commands\GitLabConnect;
 
 class LastCommitFrom extends Command{
     protected static $defaultName = "Commit";
@@ -36,15 +36,15 @@ class LastCommitFrom extends Command{
               $nick = $helper->ask($input,$output,$question);
               $repo = $helper->ask($input,$output,$question1);
               $request = new GitHubConnect();
-              $request->connecting($nick,$repo);
+              $request->getLastCommitSha($nick,$repo);
               break;
           case "Bitbucket":
               $question = new Question("Insert your workspace's name: ");
               $question1 = new Question('Insert repo name : ');
-              $workspace = $helper->ask($input,$output,$question);
-              $repoSlug = $helper->ask($input,$output,$question1);
+              $nick = $helper->ask($input,$output,$question);
+              $repo = $helper->ask($input,$output,$question1);
               $request = new BitbucketConnect();
-              $request->connecting($workspace,$repoSlug);
+              $request->getLastCommitSha($nick,$repo);
               break;
           case "GitLab":
               $question = new Question("Insert your projects ID: ");
