@@ -1,7 +1,6 @@
 <?php
 
 namespace KubaEnd\Controller;
-require "../../vendor/autoload.php";
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,6 +36,7 @@ class LastCommitFrom extends Command{
               $repo = $helper->ask($input,$output,$question1);
               $request = new GitHubConnect();
               $request->getLastCommitSha($nick,$repo);
+              $request->showSha();
               break;
           case "Bitbucket":
               $question = new Question("Insert your workspace's name: ");

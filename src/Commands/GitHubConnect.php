@@ -2,16 +2,26 @@
 
 namespace KubaEnd\Commands;
 
-use GuzzleHttp\Client;
+use KubaEnd\Commands\Abstracts\PlatformConnect;
+use KubaEnd\Commands\Interfaces\ProcessResponseInterface;
 
 
-class GitHubConnect{
-    public function getLastCommitSha($nick,$repo){
-        $client = new Client();
+class GitHubConnect extends PlatformConnect implements ProcessResponseInterface {
+    private string $nick;
+    private string $repo;
+    public function getLastCommitSha($nick,$repo):object{
+        $client=$this->mkClient();
+        $this->nick=$nick;
+        $this->repo=$repo;
         $request = $client->request('GET', 'https://api.github.com/repos/'.$nick.'/'.$repo.'/commits');
-        $response =$request->getBody();
-        $responseAsArray = json_decode($response,true);
-        $lastCommitSha = ($responseAsArray[0]["sha"]);
-        echo "Sha of your last commit is: ".$lastCommitSha.PHP_EOL;
+        return $request->getBody();
+        }
+    public function decode():string{
+        $responseAsArray = json_decode($this->getLastCommitSha($this->nick,$this->repo),true);
+        return ($responseAsArray[0]["sha"]);
+
+        }
+    public function showSha(){
+        echo "Sha of your last commit is: ".$this->decode().PHP_EOL;
         }
 }
