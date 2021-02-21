@@ -3,8 +3,7 @@
 namespace KubaEnd\Commands;
 
 use KubaEnd\Common\Commands\AbstractCommand;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Question\Question;
+use KubaEnd\Platforms\GitHub\Platform as GitHubPlatform;
 
 class GetLastCommitSha extends AbstractCommand
 {
@@ -39,34 +38,25 @@ class GetLastCommitSha extends AbstractCommand
     public function handle(): int
     {
         $platform = $this->askAboutPlatform();
-        $this->writeLine(sprintf('%s platform selected.', $platform));
+        $lastCommitSha = null;
 
         switch ($platform) {
             case self::GITHUB_PLATFORM:
-                $login = $this->askQuestion('Insert your login:');
-                $repositoryName = $this->askQuestion('Insert your repo name:');
+                $login = $this->askQuestion('Insert your login: ');
+                $repositoryName = $this->askQuestion('Insert your repo name: ');
 
-                $request = new GitHubConnect();
-                $request->getLastCommitSha($login, $repositoryName);
-                $request->showSha();
+                $githubPlatform = new GitHubPlatform();
+                $lastCommitSha = $githubPlatform->getLastCommitSha($login, $repositoryName);
                 break;
-            case self::BITBUCKET_PLATFORM:
-                $question = new Question("Insert your workspace's name: ");
-                $question1 = new Question('Insert repo name : ');
-                $login = $helper->ask($input, $output, $question);
-                $repositoryName = $helper->ask($input, $output, $question1);
-                $request = new BitbucketConnect();
-                $request->getLastCommitSha($login, $repositoryName);
-                break;
-            case self::GITLAB_PLATFORM:
-                $question = new Question("Insert your projects ID: ");
-                $projectId = $helper->ask($input, $output, $question);
-                $request = new GitLabConnect();
-                $request->connecting($projectId);
-                break;
+            default:
+                throw new \InvalidArgumentException('Invalid platform provided.');
         }
 
-        return Command::SUCCESS;
+        $this->writeLine('');
+        $this->writeLine(sprintf('%s platform selected.', $platform));
+        $this->writeLine(sprintf('Last commit SHA is [%s]', $lastCommitSha));
+
+        return self::SUCCESS;
     }
 
 }
