@@ -10,8 +10,18 @@ use Symfony\Component\Console\Question\Question;
 
 abstract class AbstractCommand extends Command
 {
+    /**
+     * Command input interface.
+     *
+     * @var InputInterface
+     */
     protected InputInterface $input;
 
+    /**
+     * Command output interface.
+     *
+     * @var OutputInterface
+     */
     protected OutputInterface $output;
 
     public function execute(InputInterface $input, OutputInterface $output): int
@@ -23,6 +33,26 @@ abstract class AbstractCommand extends Command
     }
 
     abstract public function handle(): int;
+
+    /**
+     * Ask choice question to user.
+     *
+     * @param string $question
+     * @param array  $choices
+     * @param null   $default
+     *
+     * @return string|int|bool|mixed|null
+     */
+    protected function askChoiceQuestion(string $question, array $choices, $default = null)
+    {
+        $question = new ChoiceQuestion($question, $choices, $default);
+
+        return $this->createQuestionHelper()->ask(
+            $this->input,
+            $this->output,
+            $question
+        );
+    }
 
     protected function askQuestion(string $question): string
     {
@@ -36,17 +66,6 @@ abstract class AbstractCommand extends Command
     protected function createQuestionHelper()
     {
         return $this->getHelper('question');
-    }
-
-    protected function askChoiceQuestion(string $question, array $choices, $default = null)
-    {
-        $question = new ChoiceQuestion($question, $choices, $default);
-
-        return $this->createQuestionHelper()->ask(
-            $this->input,
-            $this->output,
-            $question
-        );
     }
 
     protected function writeLine(string $line): void
