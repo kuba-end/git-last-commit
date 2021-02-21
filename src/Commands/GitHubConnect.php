@@ -1,12 +1,13 @@
 <?php
 
 namespace KubaEnd\Commands;
+require ('/home/ciecierzyca/PhpstormProjects/last_commit/src/Commands/Interfaces/ProcessResponseInterface.php');
 
-use KubaEnd\Commands\Abstracts\PlatformConnect;
+use KubaEnd\Commands\Abstracts\CreateClient;
 use KubaEnd\Commands\Interfaces\ProcessResponseInterface;
 
 
-class GitHubConnect extends PlatformConnect implements ProcessResponseInterface {
+class GitHubConnect extends CreateClient implements ProcessResponseInterface {
     private string $nick;
     private string $repo;
     public function getLastCommitSha($nick,$repo):object{
@@ -14,7 +15,7 @@ class GitHubConnect extends PlatformConnect implements ProcessResponseInterface 
         $this->nick=$nick;
         $this->repo=$repo;
         $request = $client->request('GET', 'https://api.github.com/repos/'.$nick.'/'.$repo.'/commits');
-        return $request->getBody();
+            return $request->getBody();
         }
     public function decode():string{
         $responseAsArray = json_decode($this->getLastCommitSha($this->nick,$this->repo),true);

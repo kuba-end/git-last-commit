@@ -13,7 +13,7 @@ use KubaEnd\Commands\GitLabConnect;
 
 class LastCommitFrom extends Command{
     protected static $defaultName = "Commit";
-    protected function configure()
+    protected function configure():void
     {
         parent::configure();
         $this->setDescription('Show info about your last commit')

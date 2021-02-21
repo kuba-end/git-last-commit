@@ -2,13 +2,13 @@
 
 namespace KubaEnd\Commands;
 
-use KubaEnd\Commands\Abstracts\PlatformConnect;
+use KubaEnd\Commands\Abstracts\CreateClient;
 use KubaEnd\Commands\Interfaces\ProcessResponseInterface;
 
-class BitbucketConnect extends PlatformConnect implements ProcessResponseInterface {
-    private $nick;
-    private $repo;
-    public function getLastCommitSha($nick,$repo){
+class BitbucketConnect extends CreateClient implements ProcessResponseInterface {
+    private string $nick;
+    private string $repo;
+    public function getLastCommitSha($nick,$repo):object{
         $client=$this->mkClient();
         $this->nick=$nick;
         $this->repo=$repo;
