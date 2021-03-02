@@ -16,13 +16,11 @@ interface ClientInterface
     public function decode(ResponseInterface $response): array;
 
     /**
-     * Make request using HTTP client.
+     * Make request using HTTP client
      *
-     * @param string $method
-     * @param string $uri
-     * @param array  $options
-     *
+     * @param string $username
+     * @param string $repositoryName
      * @return array
      */
-    public function request(string $method, $uri = '', array $options = []): array;
+    public function request(string $username, string $repositoryName): array;
 }

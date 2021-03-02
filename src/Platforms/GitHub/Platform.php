@@ -2,9 +2,10 @@
 
 namespace KubaEnd\Platforms\GitHub;
 
-use KubaEnd\Platforms\Common\AbstractPlatform;
 
-class Platform extends AbstractPlatform
+use RuntimeException;
+
+class Platform extends GithubClient
 {
     /**
      * Get last commit SHA from Github via username and repository name.
@@ -16,17 +17,17 @@ class Platform extends AbstractPlatform
      */
     public function getLastCommitSha(string $username, string $repositoryName): string
     {
-        $response = $this->client->request(
-            'GET',
-            sprintf('https://api.github.com/repos/%s/%s/commits', $username, $repositoryName)
-        );
+        $response = $this->request($username, $repositoryName);
 
         if (! isset($response[0]['sha'])) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 sprintf('Cannot get last commit SHA from  [%s/%s] repository.', $username, $repositoryName)
             );
         }
-        
+
+
         return $response[0]["sha"];
     }
 }
+$test=new Platform();
+var_dump($test->getLastCommitSha('kuba-end','git-last-repo'));
