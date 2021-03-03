@@ -15,7 +15,7 @@ class Platform
         $this->response=$response;
     }
     /**
-     * Get last commit SHA from Github via user and repository names.
+     * Get last commit SHA from GitLab via repository ID.
      *
      * @param string $username
      * @param string $repositoryName

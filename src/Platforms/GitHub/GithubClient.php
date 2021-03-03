@@ -13,7 +13,7 @@ class GithubClient extends AbstractClient implements RequestInterface
     const GITHUB_BASE_URI="https://api.github.com";
 
     /**
-     * request for github return decoded response
+     * request to GitHub API, next decode JSON response
      * @param string $username
      * @param string $repositoryName
      * @return array

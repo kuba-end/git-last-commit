@@ -11,7 +11,14 @@ class GitlabClient extends AbstractClient implements RequestInterface
 {
 
     const GITLAB_BASE_URI="https://gitlab.com/api/v4";
-    const USERNAME="";
+
+    /**
+     * request to GitLab API, next decode JSON response
+     * @param string $username
+     * @param string $repositoryName
+     * @return array
+     * @throws
+     */
     public function request(string $username, string $repositoryName): array
     {
         $method='GET';

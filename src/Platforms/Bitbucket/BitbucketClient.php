@@ -14,7 +14,7 @@ class BitbucketClient extends AbstractClient implements RequestInterface
     const BITBUCKET_BASE_URI="https://api.bitbucket.org/2.0";
 
     /**
-     * Http client request returning decoded response from bitbucket
+     * request to Bitbucket API, next decode JSON response
      * @param string $username
      * @param string $repositoryName
      * @return array

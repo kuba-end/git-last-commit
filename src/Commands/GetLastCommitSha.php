@@ -26,6 +26,10 @@ class GetLastCommitSha extends AbstractCommand
 
     protected static $defaultName = "last-commit:sha";
 
+    /**
+     * Choice of platform from AVAILABLE_PLATFORMS
+     * @return string
+     */
     protected function askAboutPlatform(): string
     {
         return $this->askChoiceQuestion(
@@ -42,6 +46,15 @@ class GetLastCommitSha extends AbstractCommand
             ->setHelp('Type your login in first input area and name of repository you want to get the result from');
     }
 
+    /**
+     * Method which use certain platform depends on user choice by switch statement
+     * Place for strategy pattern in future
+     * new Platform() is using new Client() for delivery decoded response
+     * Client() gets response as a json next decode it to array
+     * Platform() just picking SHA from array
+     *
+     * @return int
+     */
     public function handle(): int
     {
         $platform = $this->askAboutPlatform();
@@ -59,8 +72,8 @@ class GetLastCommitSha extends AbstractCommand
                 $login = $this->askQuestion('Insert your login: ');
                 $repositoryName = $this->askQuestion('Insert your repo name: ');
 
-                $githubPlatform = new BitbucketPlatform(new BitbucketClient());
-                $lastCommitSha = $githubPlatform->getLastCommitSha($login, $repositoryName);
+                $bitbucketPlatform = new BitbucketPlatform(new BitbucketClient());
+                $lastCommitSha = $bitbucketPlatform->getLastCommitSha($login, $repositoryName);
                 break;
             case self::GITLAB_PLATFORM:
                 $login = "";

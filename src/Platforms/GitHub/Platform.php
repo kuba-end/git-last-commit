@@ -11,6 +11,13 @@ class Platform
 {
     private RequestInterface $response;
 
+    /**
+     * Composition solution for avoid inheritance in two classes which
+     * should not be directly bounded
+     *
+     * Platform constructor.
+     * @param RequestInterface $response
+     */
     public function __construct(RequestInterface $response){
         $this->response=$response;
     }
