@@ -6,9 +6,9 @@ namespace KubaEnd\Platforms\GitHub;
 
 
 use KubaEnd\Platforms\Common\AbstractClient;
-use KubaEnd\Platforms\Interfaces\ClientInterface;
+use KubaEnd\Platforms\Interfaces\RequestInterface;
 
-class GithubClient extends AbstractClient implements ClientInterface
+class GithubClient extends AbstractClient implements RequestInterface
 {
     const GITHUB_BASE_URI="https://api.github.com";
 

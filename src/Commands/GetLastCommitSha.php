@@ -3,8 +3,10 @@
 namespace KubaEnd\Commands;
 
 use KubaEnd\Common\Commands\AbstractCommand;
+use KubaEnd\Platforms\GitHub\GithubClient;
 use KubaEnd\Platforms\GitHub\Platform as GitHubPlatform;
 use KubaEnd\Platforms\Bitbucket\Platform as BitbucketPlatform;
+use KubaEnd\Platforms\Interfaces\PlatformInterface;
 
 class GetLastCommitSha extends AbstractCommand
 {
@@ -46,7 +48,7 @@ class GetLastCommitSha extends AbstractCommand
                 $login = $this->askQuestion('Insert your login: ');
                 $repositoryName = $this->askQuestion('Insert your repo name: ');
 
-                $githubPlatform = new GitHubPlatform();
+                $githubPlatform = new GitHubPlatform(new GithubClient());
                 $lastCommitSha = $githubPlatform->getLastCommitSha($login, $repositoryName);
                 break;
             case self::BITBUCKET_PLATFORM:

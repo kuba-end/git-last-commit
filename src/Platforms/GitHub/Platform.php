@@ -3,12 +3,19 @@
 namespace KubaEnd\Platforms\GitHub;
 
 
+
+use KubaEnd\Platforms\Interfaces\RequestInterface;
 use RuntimeException;
 
-class Platform extends GithubClient
+class Platform
 {
+    private RequestInterface $response;
+
+    public function __construct(RequestInterface $response){
+        $this->response=$response;
+    }
     /**
-     * Get last commit SHA from Github via username and repository name.
+     * Get last commit SHA from Github via user and repository names.
      *
      * @param string $username
      * @param string $repositoryName
@@ -17,15 +24,13 @@ class Platform extends GithubClient
      */
     public function getLastCommitSha(string $username, string $repositoryName): string
     {
-        $response = $this->request($username, $repositoryName);
+        $response = $this->response->request($username, $repositoryName);
 
         if (! isset($response[0]['sha'])) {
             throw new RuntimeException(
                 sprintf('Cannot get last commit SHA from  [%s/%s] repository.', $username, $repositoryName)
             );
         }
-
-
         return $response[0]["sha"];
     }
 }

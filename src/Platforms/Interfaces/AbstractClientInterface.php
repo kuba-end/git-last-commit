@@ -4,7 +4,7 @@ namespace KubaEnd\Platforms\Interfaces;
 
 use Psr\Http\Message\ResponseInterface;
 
-interface ClientInterface
+interface AbstractClientInterface
 {
     /**
      * Decode response.
