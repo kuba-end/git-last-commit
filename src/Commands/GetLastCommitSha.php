@@ -2,11 +2,15 @@
 
 namespace KubaEnd\Commands;
 
+use InvalidArgumentException;
 use KubaEnd\Common\Commands\AbstractCommand;
+use KubaEnd\Platforms\Bitbucket\BitbucketClient;
 use KubaEnd\Platforms\GitHub\GithubClient;
+use KubaEnd\Platforms\GitLab\GitlabClient;
 use KubaEnd\Platforms\GitHub\Platform as GitHubPlatform;
 use KubaEnd\Platforms\Bitbucket\Platform as BitbucketPlatform;
-use KubaEnd\Platforms\Interfaces\PlatformInterface;
+use KubaEnd\Platforms\GitLab\Platform as GitLabPlatform;
+
 
 class GetLastCommitSha extends AbstractCommand
 {
@@ -55,11 +59,18 @@ class GetLastCommitSha extends AbstractCommand
                 $login = $this->askQuestion('Insert your login: ');
                 $repositoryName = $this->askQuestion('Insert your repo name: ');
 
-                $githubPlatform = new BitbucketPlatform();
+                $githubPlatform = new BitbucketPlatform(new BitbucketClient());
                 $lastCommitSha = $githubPlatform->getLastCommitSha($login, $repositoryName);
                 break;
+            case self::GITLAB_PLATFORM:
+                $login = "";
+                $repositoryName = $this->askQuestion('Insert your project ID: ');
+
+                $gitlabPlatform = new GitLabPlatform(new GitlabClient());
+                $lastCommitSha = $gitlabPlatform->getLastCommitSha($login, $repositoryName);
+                break;
             default:
-                throw new \InvalidArgumentException('Invalid platform provided.');
+                throw new InvalidArgumentException('Invalid platform provided.');
         }
 
         $this->writeLine('');

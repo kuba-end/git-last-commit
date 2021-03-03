@@ -1,6 +1,7 @@
 <?php
 
-namespace KubaEnd\Platforms\Bitbucket;
+
+namespace KubaEnd\Platforms\GitLab;
 
 
 use KubaEnd\Platforms\Interfaces\RequestInterface;
@@ -9,6 +10,7 @@ use RuntimeException;
 class Platform
 {
     private RequestInterface $response;
+
     public function __construct(RequestInterface $response){
         $this->response=$response;
     }
@@ -24,14 +26,11 @@ class Platform
     {
         $response = $this->response->request($username, $repositoryName);
 
-        if (! isset($response["values"][0]["hash"])) {
+        if (! isset($response[0]['id'])) {
             throw new RuntimeException(
                 sprintf('Cannot get last commit SHA from  [%s/%s] repository.', $username, $repositoryName)
             );
         }
-
-
-        return $response["values"][0]["hash"];
+        return $response[0]["id"];
     }
 }
-

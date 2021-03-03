@@ -5,10 +5,10 @@ namespace KubaEnd\Platforms\Bitbucket;
 
 
 use KubaEnd\Platforms\Common\AbstractClient;
-use KubaEnd\Platforms\Interfaces\ClientInterface;
+use KubaEnd\Platforms\Interfaces\RequestInterface;
 
 
-class BitbucketClient extends AbstractClient implements ClientInterface
+class BitbucketClient extends AbstractClient implements RequestInterface
 {
 
     const BITBUCKET_BASE_URI="https://api.bitbucket.org/2.0";
